@@ -15,7 +15,7 @@ public class CaesarCipherj {
     }
 
     public static void main(String[] args) {
-        char[] text = "HelloWorld".toCharArray();
+        char[] text = "HelloWorld!".toCharArray();
         int shift = 3;
         
         encrypt(text, shift);

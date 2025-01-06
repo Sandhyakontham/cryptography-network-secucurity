@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
 
 public class PlayfairCipher {
 
@@ -6,15 +8,24 @@ public class PlayfairCipher {
     private static final String ALPHABET = "ABCDEFGHIKLMNOPQRSTUVWXYZ";
 
     public static void main(String[] args) {
-        String key = "IDRP";
-        String plaintext = "HELLO";
-        
+        Scanner scanner = new Scanner(System.in);
+
+        // Get the key from the user
+        System.out.print("Enter the key: ");
+        String key = scanner.nextLine();
+
+        // Get the plaintext from the user
+        System.out.print("Enter the plaintext: ");
+        String plaintext = scanner.nextLine();
+
         createKeyMatrix(key);
         String ciphertext = encrypt(plaintext);
-        
-        System.out.println("Key Matrix:");
+
+        System.out.println("\nKey Matrix:");
         printKeyMatrix();
-        System.out.println("Ciphertext: " + ciphertext);
+        System.out.println("\nCiphertext: " + ciphertext);
+
+        scanner.close();
     }
 
     private static void createKeyMatrix(String key) {

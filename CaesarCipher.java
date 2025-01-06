@@ -1,54 +1,43 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class CaesarCipher {
+   
+    // Function to encrypt the plaintext
+    public static String encrypt(String plaintext, int shift) {
+        StringBuilder encryptedText = new StringBuilder();
 
-    static Scanner sc = new Scanner(System.in);
-    static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
-    public static void main(String[] args) throws IOException {
-        System.out.print("Enter any String: ");
-        String str = br.readLine();
-        System.out.print("\nEnter the Key: ");
-        int key = sc.nextInt();
-        String encrypted = encrypt(str, key);
-        System.out.println("\nEncrypted String is: " + encrypted);
-        String decrypted = decrypt(encrypted, key);
-        System.out.println("\nDecrypted String is: " + decrypted);
-        System.out.println("\n");
+        for (char c : plaintext.toCharArray()) {
+            if (Character.isLetter(c)) {
+                char base = Character.isUpperCase(c) ? 'A' : 'a';
+                char encryptedChar = (char) ((c - base + shift) % 26 + base);
+                encryptedText.append(encryptedChar);
+            } else {
+                encryptedText.append(c); // Keep non-alphabet characters as is
+            }
+        }
+        return encryptedText.toString();
     }
 
-    public static String encrypt(String str, int key) {
-        String encrypted = "";
-        for (int i = 0; i < str.length(); i++) {
-            int c = str.charAt(i);
-            if (Character.isUpperCase(c)) {
-                c = c + (key % 26);
-                if (c > 'Z') c = c - 26;
-            } else if (Character.isLowerCase(c)) {
-                c = c + (key % 26);
-                if (c > 'z') c = c - 26;
-            }
-            encrypted += (char) c;
-        }
-        return encrypted;
+    // Function to decrypt the ciphertext
+    public static String decrypt(String ciphertext, int shift) {
+        return encrypt(ciphertext, 26 - shift);
     }
 
-    public static String decrypt(String str, int key) {
-        String decrypted = "";
-        for (int i = 0; i < str.length(); i++) {
-            int c = str.charAt(i);
-            if (Character.isUpperCase(c)) {
-                c = c - (key % 26);
-                if (c < 'A') c = c + 26;
-            } else if (Character.isLowerCase(c)) {
-                c = c - (key % 26);
-                if (c < 'a') c = c + 26;
-            }
-            decrypted += (char) c;
-        }
-        return decrypted;
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the plaintext: ");
+        String plaintext = scanner.nextLine();
+
+        System.out.print("Enter the shift value: ");
+        int shift = scanner.nextInt();
+
+        String encryptedText = encrypt(plaintext, shift);
+        System.out.println("Encrypted Text: " + encryptedText);
+
+        String decryptedText = decrypt(encryptedText, shift);
+        System.out.println("Decrypted Text: " + decryptedText);
+
+        scanner.close();
     }
 }
