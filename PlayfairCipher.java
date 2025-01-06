@@ -11,7 +11,7 @@ public class PlayfairCipher {
         Scanner scanner = new Scanner(System.in);
 
         // Get the key from the user
-        System.out.print("Enter  key: ");
+        System.out.print("Enter the key: ");
         String key = scanner.nextLine();
 
         // Get the plaintext from the user
