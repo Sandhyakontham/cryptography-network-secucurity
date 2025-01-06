@@ -15,7 +15,7 @@ public class PlayfairCipher {
         String key = scanner.nextLine();
 
         // Get the plaintext from the user
-        System.out.print("Enter the plaintext: ");
+        System.out.print("Enter plaintext: ");
         String plaintext = scanner.nextLine();
 
         createKeyMatrix(key);
